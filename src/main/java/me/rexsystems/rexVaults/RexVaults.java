@@ -16,6 +16,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachmentInfo;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashSet;
@@ -23,6 +24,8 @@ import java.util.Map;
 import java.util.Set;
 
 public final class RexVaults extends JavaPlugin {
+
+    private static final int BSTATS_PLUGIN_ID = 35269;
 
     private ConfigManager configManager;
     private SqliteVaultRepository repository;
@@ -58,6 +61,7 @@ public final class RexVaults extends JavaPlugin {
             getLogger().info("PlaceholderAPI expansion registered.");
         }
 
+        new Metrics(this, BSTATS_PLUGIN_ID);
         getLogger().info("RexVaults enabled.");
     }
 
