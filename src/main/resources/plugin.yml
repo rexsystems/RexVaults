@@ -1,0 +1,26 @@
+name: RexVaults
+version: '${project.version}'
+main: me.rexsystems.rexVaults.RexVaults
+api-version: '1.21'
+folia-supported: true
+authors: [RexSystems]
+description: Extra player vaults for Paper servers
+website: https://rexsystems.me
+softdepend: [PlaceholderAPI]
+
+commands:
+  rexvaults:
+    description: Open and manage vaults
+    aliases: [rvault, vaults]
+    usage: /rexvaults <open|list|reload|help|admin>
+
+permissions:
+  rexvaults.use:
+    description: Open and list your own vaults
+    default: true
+  rexvaults.reload:
+    description: Reload RexVaults
+    default: op
+  rexvaults.admin:
+    description: Open another player's vault
+    default: op

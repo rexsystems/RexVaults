@@ -1,0 +1,101 @@
+# RexVaults configuration
+# Player-facing text accepts MiniMessage, legacy & codes, &#RRGGBB, and #RRGGBB.
+# Inserted names are literal. Put color in the template, around the token.
+
+config-version: 1
+
+storage:
+  # sqlite is the only type. Anything else is logged and sqlite is used anyway.
+  # The file is opened on startup. Reload does not move, delete, or recreate it.
+  type: sqlite
+  file: vaults.db
+
+vault:
+  # Rows of 9. 6 is a double chest. Values above 6 stay at 54 slots.
+  # A value under 1 becomes one row. The slot count is floored to a multiple of 9.
+  rows: 6
+  title: "<white>Vault {vault}"
+
+selector:
+  rows: 6
+  title: "<white>Vaults"
+  # Each vault button is that vault's icon slot.
+  # Left-click opens it. An item on the cursor, or a hotbar number key, sets the icon and is not taken.
+  vault-name: "<white>Vault {vault}"
+  vault-lore:
+    - "<gray>Click to open"
+    - "<gray>Put an item here to set the icon"
+  default-icon: CHEST
+  filler:
+    enabled: true
+    material: GRAY_STAINED_GLASS_PANE
+    name: " "
+  previous:
+    # Slot -1 hides the button. The slot is then free for a vault icon.
+    slot: 45
+    material: ARROW
+    name: "<gray>Previous"
+  next:
+    slot: 53
+    material: ARROW
+    name: "<gray>Next"
+
+# Material names. A listed item cannot be put into a vault. Taking one out is allowed.
+blacklist:
+  - BEDROCK
+  - BARRIER
+  - COMMAND_BLOCK
+  - CHAIN_COMMAND_BLOCK
+  - REPEATING_COMMAND_BLOCK
+  - COMMAND_BLOCK_MINECART
+  - STRUCTURE_BLOCK
+  - STRUCTURE_VOID
+  - JIGSAW
+  - DEBUG_STICK
+  - LIGHT
+  - SPAWNER
+
+sounds:
+  open:
+    enabled: true
+    sound: BLOCK_CHEST_OPEN
+    volume: 0.6
+    pitch: 1.0
+  close:
+    enabled: true
+    sound: BLOCK_CHEST_CLOSE
+    volume: 0.6
+    pitch: 1.0
+  denied:
+    enabled: true
+    sound: BLOCK_NOTE_BLOCK_BASS
+    volume: 0.8
+    pitch: 0.7
+  icon:
+    enabled: true
+    sound: ENTITY_ITEM_FRAME_ADD_ITEM
+    volume: 0.5
+    pitch: 1.1
+
+messages:
+  prefix: "<gray>[<#f75634>RexVaults<gray>] "
+  no-permission: "{prefix}<red>You do not have permission to do that."
+  players-only: "{prefix}<red>Only players can do that."
+  reload: "{prefix}<green>Configuration reloaded."
+  no-vaults: "{prefix}<red>You do not have any vaults."
+  vault-missing: "{prefix}<red>You do not have vault {vault}."
+  invalid-vault: "{prefix}<red>That vault number is not valid."
+  in-use: "{prefix}<red>Vault {vault} is already open."
+  blacklist: "{prefix}<red>You cannot put that item in a vault."
+  unknown-player: "{prefix}<red>No player named <white>{player}<red> has joined."
+  load-failed: "{prefix}<red>Vault {vault} could not be opened. Nothing was saved."
+  icon-set: "{prefix}<gray>Vault <white>{vault}<gray> icon set to <white>{icon}<gray>."
+  admin-usage: "{prefix}<gray>Usage: <white>/rexvaults admin open <player> <vault>"
+  admin-opened: "{prefix}<gray>Opened vault <white>{vault}<gray> for <white>{player}<gray>."
+  list: "{prefix}<gray>Vaults <white>1<gray> to <white>{count}<gray>."
+  help-header: "{prefix}<white>RexVaults"
+  help:
+    - "<gray>/rexvaults open [vault] <dark_gray>- <white>Open the selector, or one vault"
+    - "<gray>/rexvaults list <dark_gray>- <white>Show how many vaults you have"
+    - "<gray>/rexvaults reload <dark_gray>- <white>Reload the configuration"
+    - "<gray>/rexvaults admin open <player> <vault> <dark_gray>- <white>Open a player's vault"
